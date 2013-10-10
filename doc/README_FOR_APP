@@ -1,0 +1,9 @@
+ruby 1.9.3p448
+rails 3.1.0
+
+change configuration for DB and Mail
+
+rake db:create
+rake db:migrate
+rake db:seed
+

@@ -1,0 +1,25 @@
+- unless current_user
+  = link_to 'New ticket', new_ticket_path
+  %br
+  = render @tickets
+- else
+  #tabs
+    %ul
+      %li
+        %a(href="#tabs-1")My tickets
+      %li
+        %a(href="/tickets/get_tickets?tab=unassigned")New unassigned tickets
+      %li
+        %a(href="/tickets/get_tickets?tab=open")Open Tickets
+      %li
+        %a(href="/tickets/get_tickets?tab=on_hold")On hold tickets
+      %li
+        %a(href="/tickets/get_tickets?tab=closed")Closed Tickets
+
+    #tabs-1
+      = render @tickets
+
+  :javascript
+    $(function(){
+      $("#tabs").tabs();
+    });

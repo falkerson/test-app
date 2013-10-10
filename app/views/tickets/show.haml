@@ -1,0 +1,42 @@
+- if current_user
+  = link_to 'Take ticket', take_ticket_ticket_path(@ticket)
+  = collection_select(:ticket, :status_id, Status.all, :id, :name)
+  = collection_select(:ticket, :user_id, User.all, :id, :login)
+  %br
+  %br
+
+= @ticket.customer_name
+%br
+= @ticket.customer_email
+%br
+= @ticket.subject
+%br
+= @ticket.body
+%br
+%br
+
+= render @ticket.replies
+= render 'replies/form'
+
+= link_to 'Dashboard', tickets_path
+%br
+
+- if current_user
+  :javascript
+    $(function(){
+      $('#ticket_status_id').change(function(){
+        $.ajax({
+          url: "/tickets/#{@ticket.id}/change_status",
+          method: 'POST',
+          data: 'status_id=' + this.value
+        })
+      });
+
+      $('#ticket_user_id').change(function(){
+        $.ajax({
+          url: "/tickets/#{@ticket.id}/change_owner",
+          method: 'POST',
+          data: 'user_id=' + this.value
+        })
+      });
+    });

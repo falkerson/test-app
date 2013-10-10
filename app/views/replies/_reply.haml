@@ -1,0 +1,11 @@
+%p
+  %strong
+    User:
+  - if reply.user
+    = reply.user.login
+  - elsif reply.customer_name
+    = reply.customer_name
+%p
+  %strong
+    Reply:
+  = reply.body

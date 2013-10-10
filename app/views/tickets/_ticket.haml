@@ -1,0 +1,10 @@
+= link_to "ABC-#{ticket.id}", "ABC-#{ticket.id}"
+- if current_user
+  .status
+    - if !ticket.user.nil?
+      = ticket.user.login
+    - else
+      UnAssigned
+    |
+    = ticket.status.name
+%br
